@@ -122,30 +122,29 @@ plt.tight_layout()
 plt.legend(title='Price Type')
 plt.show()
 
-############################# Apache Spark ######################################################
+############################# APACHE SPARK #############################################
 
 #importing relevant libraries
 from pyspark.sql import SparkSession
 import matplotlib.pyplot as plt
 
-# Initialize SparkSession
+# Initializing SparkSession
 spark = SparkSession.builder \
     .appName("UK HPI Analysis") \
     .getOrCreate()
 
-# Load CSV data into a DataFrame
+# Loading CSV data into a DataFrame
 df = spark.read.csv('uk_hpi_pp2.csv', header=True, inferSchema=True)
 
-# Perform basic analysis (e.g., count rows, show schema)
+# Performing basic analysis (e.g., count rows, show schema)
 df.show()
 df.printSchema()
 
-# Perform data aggregation or analysis using Spark DataFrame operations
-# For example, calculate average prices by region or year
+# Performing data analysis using Spark DataFrame operations in calculate average house prices by region 
 avg_prices_by_region = df.groupBy('RegionName').avg('AveragePrice')
 avg_prices_by_region.show()
 
-# Visualize the results using Matplotlib
+# Visualizing the results using Matplotlib
 avg_prices_by_region_df = avg_prices_by_region.toPandas()
 plt.figure(figsize=(10, 6))
 plt.bar(avg_prices_by_region_df['RegionName'], avg_prices_by_region_df['avg(AveragePrice)'])
@@ -157,5 +156,5 @@ plt.xticks(fontsize=5)
 plt.tight_layout()
 plt.show()
 
-# Stop SparkSession
+# Stopping SparkSession
 spark.stop()
