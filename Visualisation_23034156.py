@@ -35,6 +35,7 @@ df = df.sort_values(by="Date").copy()
 # save dataframe with only data for geojson locations
 df_map = df[df["AreaCode"].isin(all_geo_locations)]
 
+##############################################CHOROPLETH MAP##############################################
 
 # function to make choropleth map
 def choroplot(df, titlex):
@@ -72,6 +73,8 @@ choroplot(df_2013, "2013 December")
 df_2023 = df_map[df_map.Date == "2023-12-01"]
 choroplot(df_2023, "2023 December")
 
+##############################################BUBBLE PLOT##############################################
+
 # save dataframe with only dec 2022 data
 df_2022 = df_map[df_map.Date == "2022-12-01"]
 
@@ -89,7 +92,7 @@ cities = [
     "Stoke-on-Trent",
 ]
 
-# bubble plot
+# create bubble plot using plotly express
 fig = px.scatter(
     df_2022.query("RegionName in @cities"),
     x="12m%Change",
@@ -109,6 +112,8 @@ fig.update_layout(
     height=800,
 )
 fig.show()
+
+##############################################MULTI-LINE PLOT##############################################
 
 # save dataframe with data of only select cities
 df_cities = df_map[["Date", "AveragePrice", "RegionName"]].query(
@@ -130,6 +135,8 @@ fig.update_layout(
 )
 
 fig.show()
+
+##############################################DUMBELL PLOT##############################################
 
 # Initialise dictionary
 data = {
