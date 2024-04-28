@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.io as pio
+
 pio.renderers.default = "browser"  # to render the visualisations in browser
 import plotly.graph_objects as go
 
@@ -34,6 +35,7 @@ df = df.sort_values(by="Date").copy()
 # save dataframe with only data for geojson locations
 df_map = df[df["AreaCode"].isin(all_geo_locations)]
 
+
 # function to make choropleth map
 def choroplot(df, titlex):
 
@@ -60,6 +62,7 @@ def choroplot(df, titlex):
     )
 
     fig.show()
+
 
 # use dec 2013 data for choroplot
 df_2013 = df_map[df_map.Date == "2013-12-01"]
